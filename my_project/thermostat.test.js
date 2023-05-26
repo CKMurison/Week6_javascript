@@ -34,12 +34,38 @@ describe('Thermostat', () => {
   });
   it('should not surpass 25 degrees if power saver is on', () => {
     const response = new Thermostat
-    response.setPowerSaving();
+    response.setPowerSaving(true);
     response.up();
     response.up();
     response.up();
     response.up();
     response.up();
     expect(response.up()).toEqual('Sorry. Max temperature reached! Turn off power saving to go even hotter!')
+  })
+  it('should surpass 25 degrees if powerSaver is off', () => {
+    const response = new Thermostat
+    response.setPowerSaving(false);
+    response.up();
+    response.up();
+    response.up();
+    response.up();
+    response.up();
+    response.up();
+    response.up();
+    expect(response.getTemp()).toEqual(27)
+  })
+  it('should not go below 10 degrees', () => {
+    const response = new Thermostat
+    response.down();
+    response.down();
+    response.down();
+    response.down();
+    response.down();
+    response.down();
+    response.down();
+    response.down();
+    response.down();
+    response.down();
+    expect(response.down()).toEqual('Sorry. I can only go to 10 degrees! No lower!!!')
   })
 });
