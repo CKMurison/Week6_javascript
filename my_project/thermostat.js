@@ -11,7 +11,10 @@ class Thermostat {
   up() {
     if (this.powerSaver == true && this.temperature == 25) {
       return 'Sorry. Max temperature reached! Turn off power saving to go even hotter!'
-    } else {
+    } else if (this.powerSaver == false && this.temperature == 32)  {
+      return 'Sorry I can only go to 32 degrees!'
+    }
+    else {
     this.temperature = this.temperature + 1;
     }
   }
@@ -40,6 +43,3 @@ class Thermostat {
 }
 
 module.exports = Thermostat;
-
-
-// if setPowerSaving(false), max temp === 32
